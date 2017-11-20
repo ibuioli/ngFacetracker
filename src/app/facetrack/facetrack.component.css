@@ -1,0 +1,13 @@
+#overlay, #video {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  transform: scaleX(-1);
+  width: 400px;
+  height: 300px;
+}
+#layer-3D{
+  position:absolute;
+  top:0;
+  left:0;
+}

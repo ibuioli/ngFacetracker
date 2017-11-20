@@ -1,0 +1,17 @@
+<video #hardwareVideo width="400" height="300" id="video" autoplay loop></video>
+<canvas #overlay width="400" height="300" id="overlay"></canvas>
+<div id="layer-3D">
+  <layer-3d
+    [cameraZ]="400"
+    [fieldOfView]="50"
+    [nearClipping]="1"
+    [farClipping]="1000"
+    [scaleX]="scaleX"
+    [scaleY]="scaleY"
+    [rotationY]="rotationY"
+    [rotationZ]="rotationZ"
+    [rotationX]="rotationX"
+    [posx]="posx"
+    [posy]="posy">
+  </layer-3d>
+</div>
