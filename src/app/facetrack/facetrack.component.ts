@@ -10,6 +10,7 @@ declare var navigator: any;
 export class FacetrackComponent implements OnInit {
   @ViewChild("hardwareVideo") private hardwareVideo: ElementRef;
   @ViewChild("overlay") private overlay: ElementRef;
+  @ViewChild("webgl") private webgl: ElementRef;
   /////////////////////////////////////////////////////////////
   private constraints:any;
   public track:any;
@@ -68,10 +69,15 @@ export class FacetrackComponent implements OnInit {
   }
 
   private clmtrackr() {
-    this.track = new FaceTracker(this.hardwareVideo, this.overlay, true);
+    this.track = new FaceTracker(this.hardwareVideo, this.overlay, this.webgl, true);
     this.track.clmInit();
+    //Debug
     this.track.drawLoop();
-    this.track.getFaceData();
+    this.track.drawGrid();//*/Comment for No-Debug
+    //Draw Face Mask
+    //this.track.drawMask();//Comment for No-Mask
+    //Draw 3D Objects
+    this.track.getFaceData();//Comment for No-3D-Objects
   }
 
   private loop = () =>{

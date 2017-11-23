@@ -1,4 +1,4 @@
-#overlay, #video {
+#overlay, #video, #webgl {
   position: absolute;
   top: 0px;
   left: 0px;
