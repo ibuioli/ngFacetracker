@@ -5,7 +5,7 @@ Face tracking in 3D, position, scale and rotation in three spacial axis.
 
 #### Features:
 * Get 61 Face Points via integration clmtrackr with Angular
-* Integration to *face_deformer.js* to Angular for Face Masking
+* Integration of *face_deformer.js* to Angular, for Face Masking
 * Get 3D information of Face (position, scale, rotation)
 * Integration to 3D information to ThreeJS environment
 
