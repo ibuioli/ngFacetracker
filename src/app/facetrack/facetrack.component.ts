@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, Input, ViewChild } from '@angular/core';
 import { FaceTracker } from "./facetrack";
 declare var navigator: any;
 
@@ -21,6 +21,9 @@ export class FacetrackComponent implements OnInit {
   public rotationX:number = 0;
   public posx:number = 0;
   public posy:number = 0;
+  ////////////////////////////////////////////////////////////
+  @Input() public width:number = 400;
+  @Input() public height:number = 300;
 
   constructor() {
     navigator.getUserMedia = (navigator.getUserMedia ||

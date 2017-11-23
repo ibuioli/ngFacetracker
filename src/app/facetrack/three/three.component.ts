@@ -17,31 +17,22 @@ export class ThreeComponent implements AfterViewInit {
   private scene: THREE.Scene;
 
   /* PROPERTIES */
-  @Input()
-  public cameraZ:number = 400;
-  @Input()
-  public fieldOfView:number = 50;
-  @Input('nearClipping')
-  public nearClippingPane:number = 1;
-  @Input('farClipping')
-  public farClippingPane:number = 1000;
+  @Input() public width:number = 400;
+  @Input() public height:number = 300;
+  @Input() public cameraZ:number = 400;
+  @Input() public fieldOfView:number = 50;
+  @Input('nearClipping') public nearClippingPane:number = 1;
+  @Input('farClipping') public farClippingPane:number = 1000;
 
-  @Input('scaleX')
-  public scaleX:number = 1;
-  @Input('scaleY')
-  public scaleY:number = 1;
+  @Input('scaleX') public scaleX:number = 1;
+  @Input('scaleY') public scaleY:number = 1;
 
-  @Input('rotationY')
-  public rotationY:number = 0;
-  @Input('rotationZ')
-  public rotationZ:number = 0;
-  @Input('rotationX')
-  public rotationX:number = 0;
+  @Input('rotationY') public rotationY:number = 0;
+  @Input('rotationZ') public rotationZ:number = 0;
+  @Input('rotationX') public rotationX:number = 0;
 
-  @Input('posx')
-  public posx:number = 0;
-  @Input('posy')
-  public posy:number = 0;
+  @Input('posx') public posx:number = 0;
+  @Input('posy') public posy:number = 0;
 
   constructor() { }
 

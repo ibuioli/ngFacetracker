@@ -1,8 +1,10 @@
-<video #hardwareVideo width="400" height="300" id="video" autoplay loop></video>
-<canvas #overlay width="400" height="300" id="overlay"></canvas>
-<canvas #webgl width="400" height="300" id="webgl"></canvas>
+<video #hardwareVideo width="{{width}}" height="{{height}}" id="video" autoplay loop></video>
+<canvas #overlay width="{{width}}" height="{{height}}" id="overlay"></canvas>
+<canvas #webgl width="{{width}}" height="{{height}}" id="webgl"></canvas>
 <div id="layer-3D" *ngIf="true">
   <layer-3d
+    [width]="width"
+    [height]="height"
     [cameraZ]="400"
     [fieldOfView]="50"
     [nearClipping]="1"
