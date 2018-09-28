@@ -1,4 +1,4 @@
-const webgl_utils = require('./webgl_utils.js');
+const webgl_utils = require('./webgl_utils');
 
 "use strict";
 module.exports  = {
