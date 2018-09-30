@@ -33,21 +33,21 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-declare var window: any;
+declare let window: any;
 
 export class WebGLUtils {
-  public LOGGING_ENABLED:boolean = true;
+  private LOGGING_ENABLED:boolean = true;
 
   constructor(){}
 
-  public log(msg) {
+  public log(msg):void {
     if (!this.LOGGING_ENABLED) { return; }
     if (window.console && window.console.log) {
       window.console.log(msg);
     }
   }
 
-  public error(msg) {
+  public error(msg):void {
     if (!this.LOGGING_ENABLED) { return; }
     if (window.console) {
       if (window.console.error) {
@@ -68,7 +68,7 @@ export class WebGLUtils {
   }
 
   public glEnumToString(gl, value):string {
-    for (var p in gl) {
+    for (let p in gl) {
       if (gl[p] === value) {
         return p;
       }
@@ -92,7 +92,7 @@ export class WebGLUtils {
       return null;
     }
 
-    var context = this.create3DContext(canvas, optAttribs);
+    let context = this.create3DContext(canvas, optAttribs);
     if (!context) {
       return null;
     }
@@ -100,9 +100,9 @@ export class WebGLUtils {
   }
 
   public create3DContext(canvas, optAttribs):any {
-    var names = ['webgl', 'experimental-webgl'];
-    var context = null;
-    for (var ii = 0; ii < names.length; ++ii) {
+    let names = ['webgl', 'experimental-webgl'];
+    let context = null;
+    for (let ii = 0; ii < names.length; ++ii) {
       try {
         context = canvas.getContext(names[ii], optAttribs);
       } catch (e) {}
@@ -128,14 +128,14 @@ export class WebGLUtils {
       canvas.height = canvas.clientHeight;
     }
 
-    var gl = this.setupWebGL(canvas, "");
+    let gl = this.setupWebGL(canvas, "");
     return gl;
   }
 
   public loadShader(gl, shaderSource, shaderType, optErrorCallback):any {
-    var errFn = optErrorCallback || this.error;
+    let errFn = optErrorCallback || this.error;
     // Create the shader object
-    var shader = gl.createShader(shaderType);
+    let shader = gl.createShader(shaderType);
 
     // Load the shader source
     gl.shaderSource(shader, shaderSource);
@@ -144,10 +144,10 @@ export class WebGLUtils {
     gl.compileShader(shader);
 
     // Check the compile status
-    var compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
+    let compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
     if (!compiled) {
       // Something went wrong during compilation; get the error
-      var lastError = gl.getShaderInfoLog(shader);
+      let lastError = gl.getShaderInfoLog(shader);
       errFn("*** Error compiling shader '" + shader + "':" + lastError);
       gl.deleteShader(shader);
       return null;
@@ -156,13 +156,13 @@ export class WebGLUtils {
     return shader;
   }
 
-  public loadProgram(gl, shaders, optAttribs, optLocations) {
-    var program = gl.createProgram();
-    for (var i = 0; i < shaders.length; ++i) {
+  public loadProgram(gl, shaders, optAttribs, optLocations):any {
+    let program = gl.createProgram();
+    for (let i = 0; i < shaders.length; ++i) {
       gl.attachShader(program, shaders[i]);
     }
     if (optAttribs) {
-      for (var i = 0; i < optAttribs.length; ++i) {
+      for (let i = 0; i < optAttribs.length; ++i) {
         gl.bindAttribLocation(
             program,
             optLocations ? optLocations[i] : i,
@@ -184,10 +184,10 @@ export class WebGLUtils {
     return program;
   }
 
-  /*public createShaderFromScript(gl, scriptId, optShaderType, optErrorCallback):any {
-    var shaderSource = '';
-    var shaderType;
-    var shaderScript = document.getElementById(scriptId);
+  public createShaderFromScript(gl, scriptId, optShaderType, optErrorCallback):any {
+    let shaderSource = '';
+    let shaderType;
+    let shaderScript = (<HTMLScriptElement>document.getElementById(scriptId));
     if (!shaderScript) {
       throw new Error('*** Error: unknown script element' + scriptId);
     }
@@ -212,6 +212,6 @@ export class WebGLUtils {
       optShaderType || shaderType,
       optErrorCallback
     );
-  }*/
-
+  }
+  //--END WEBGL_UTILS.TS
 }

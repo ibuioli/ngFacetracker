@@ -36,7 +36,7 @@ export class ThreeComponent implements AfterViewInit {
 
   constructor() { }
 
-  private animate(){
+  private animate():void {
     this.scene.scale.set(this.scaleX, this.scaleY, this.scaleX);
     this.scene.position.x = ( (this.posx-(this.canvas.clientWidth/2) )*-1 );
     this.scene.position.y = ( (this.posy-(this.canvas.clientHeight/2) )*-1);
@@ -45,7 +45,7 @@ export class ThreeComponent implements AfterViewInit {
     this.scene.rotation.x = this.rotationX / 50*-1;
   }
 
-  private create(){
+  private create():void {
     //PreScene
     let preScene = new THREE.Scene();
     //Cube for Debug
@@ -60,19 +60,19 @@ export class ThreeComponent implements AfterViewInit {
     this.scene.add(preScene);
   }
 
-  private createScene() {
+  private createScene():void {
     /* Scene */
     this.scene = new THREE.Scene();
 
     /* Camera */
     let aspectRatio = this.canvas.clientWidth / this.canvas.clientHeight;
     this.camera = new THREE.OrthographicCamera(this.canvas.clientWidth / - 2, this.canvas.clientWidth / 2,
-      this.canvas.clientHeight / 2, this.canvas.clientHeight / - 2, this.nearClippingPane, this.farClippingPane);
+    this.canvas.clientHeight / 2, this.canvas.clientHeight / - 2, this.nearClippingPane, this.farClippingPane);
     this.camera.position.z = this.cameraZ;
   }
 
   /* LOOP */
-  private startRenderingLoop() {
+  private startRenderingLoop():void {
     /* Renderer */
     this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, alpha: true, premultipliedAlpha: false});
     this.renderer.setPixelRatio(devicePixelRatio);
@@ -87,13 +87,13 @@ export class ThreeComponent implements AfterViewInit {
   }
 
   /* EVENTS */
-  public onResize() {
+  public onResize():void {
     //this.camera.aspect = this.getAspectRatio();
     //this.camera.updateProjectionMatrix();
     this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
   }
 
-  public ngAfterViewInit() {
+  public ngAfterViewInit():void {
     this.createScene();
     this.create();
     this.startRenderingLoop();

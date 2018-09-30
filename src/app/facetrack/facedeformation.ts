@@ -1,28 +1,28 @@
 import { WebGLUtils } from "./webgl_utils";
 
 export class FaceDeformer {
-  public gl:any
-  public verticeMap:any;
-  public numTriangles;
-  public maxx;
-  public minx;
-  public maxy;
-  public miny;
-  public width;
-  public height;
-  public first:boolean = true;
-  public textureVertices;
-  public gridVertices;
-  public texCoordBuffer;
-  public gridCoordbuffer;
-  public texCoordLocation;
-  public pdmModel;
+  private gl:any
+  private verticeMap:any;
+  private numTriangles:number;
+  private maxx:number
+  private minx:number;
+  private maxy:number;
+  private miny:number;
+  private width:number;
+  private height:number;
+  private first:boolean = true;
+  private textureVertices:any;
+  private gridVertices:any;
+  private texCoordBuffer:any;
+  private gridCoordbuffer:any;
+  private texCoordLocation:any;
+  private pdmModel:any;
 
-  public usegrid:boolean = false;
-  public drawProgram;
-  public gridProgram;
+  private usegrid:boolean = false;
+  private drawProgram:any;
+  private gridProgram:any;
 
-  public webgl_utils:any;
+  private webgl_utils:any;
 
   constructor(){
     this.webgl_utils = new WebGLUtils();
@@ -48,7 +48,7 @@ export class FaceDeformer {
     this.minx = element.width;
     this.maxy = 0;
     this.miny = element.height;
-    for (var i = 0;i < points.length;i++) {
+    for (let i = 0;i < points.length;i++) {
       if (points[i][0] > this.maxx) this.maxx = points[i][0];
       if (points[i][0] < this.minx) this.minx = points[i][0];
       if (points[i][1] > this.maxy) this.maxy = points[i][1];
@@ -62,7 +62,7 @@ export class FaceDeformer {
     this.height = this.maxy-this.miny;
 
     if (element.tagName == 'VIDEO' || element.tagName == 'IMG') {
-      var ca = document.createElement('canvas');
+      let ca = document.createElement('canvas');
       ca.width = element.width;
       ca.height = element.height;
       var cc:any = ca.getContext('2d');
@@ -70,19 +70,19 @@ export class FaceDeformer {
     } else if (element.tagName == 'CANVAS') {
       var cc:any = element.getContext('2d');
     }
-    var image = cc.getImageData(this.minx, this.miny, this.width, this.height);
+    let image = cc.getImageData(this.minx, this.miny, this.width, this.height);
 
     // correct points
-    var nupoints = [];
-    for (var i = 0;i < points.length;i++) {
+    let nupoints = [];
+    for (let i = 0;i < points.length;i++) {
       nupoints[i] = [];
       nupoints[i][0] = points[i][0] - this.minx;
       nupoints[i][1] = points[i][1] - this.miny;
     }
 
     // create vertices based on points
-    var textureVertices = [];
-    for (var i = 0;i < this.verticeMap.length;i++) {
+    let textureVertices = [];
+    for (let i = 0;i < this.verticeMap.length;i++) {
       textureVertices.push(nupoints[this.verticeMap[i][0]][0]/this.width);
       textureVertices.push(nupoints[this.verticeMap[i][0]][1]/this.height);
       textureVertices.push(nupoints[this.verticeMap[i][1]][0]/this.width);
@@ -93,7 +93,7 @@ export class FaceDeformer {
 
     if (this.first) {
       // create program for drawing grid
-      var gridVertexShaderProg = [
+      let gridVertexShaderProg = [
         "attribute vec2 a_position;",
         "",
         "uniform vec2 u_resolution;",
@@ -106,24 +106,24 @@ export class FaceDeformer {
         "}"
       ].join('\n');
 
-      var gridFragmentShaderProg = [
+      let gridFragmentShaderProg = [
         "void main() {",
         "  gl_FragColor = vec4(0.2, 0.2, 0.2, 1.0);",
         "}"
       ].join('\n');
 
-      var gridVertexShader = this.webgl_utils.loadShader(this.gl, gridVertexShaderProg, this.gl.VERTEX_SHADER);
-      var gridFragmentShader = this.webgl_utils.loadShader(this.gl, gridFragmentShaderProg, this.gl.FRAGMENT_SHADER);
+      let gridVertexShader = this.webgl_utils.loadShader(this.gl, gridVertexShaderProg, this.gl.VERTEX_SHADER);
+      let gridFragmentShader = this.webgl_utils.loadShader(this.gl, gridFragmentShaderProg, this.gl.FRAGMENT_SHADER);
       try {
         this.gridProgram = this.webgl_utils.loadProgram(this.gl, [gridVertexShader, gridFragmentShader]);
       } catch(err) {
-        alert("There was a problem setting up the webGL programs. Maybe you should try it in another browser. :(");
+        alert("There was a problem setting up the webGL programs. Maybe you should try it in another browser.");
       }
 
       this.gridCoordbuffer = this.gl.createBuffer();
 
       // create program for drawing deformed face
-      var vertexShaderProg = [
+      let vertexShaderProg = [
         "attribute vec2 a_texCoord;",
         "attribute vec2 a_position;",
         "",
@@ -141,7 +141,7 @@ export class FaceDeformer {
         "}"
       ].join('\n');
 
-      var fragmentShaderProg = [
+      let fragmentShaderProg = [
         "precision mediump float;",
         "",
         "uniform sampler2D u_image;",
@@ -153,8 +153,8 @@ export class FaceDeformer {
         "}"
       ].join('\n');
 
-      var vertexShader = this.webgl_utils.loadShader(this.gl, vertexShaderProg, this.gl.VERTEX_SHADER);
-      var fragmentShader = this.webgl_utils.loadShader(this.gl, fragmentShaderProg, this.gl.FRAGMENT_SHADER);
+      let vertexShader = this.webgl_utils.loadShader(this.gl, vertexShaderProg, this.gl.VERTEX_SHADER);
+      let fragmentShader = this.webgl_utils.loadShader(this.gl, fragmentShaderProg, this.gl.FRAGMENT_SHADER);
       this.drawProgram = this.webgl_utils.loadProgram(this.gl, [vertexShader, fragmentShader]);
 
       this.texCoordBuffer = this.gl.createBuffer();
@@ -166,7 +166,7 @@ export class FaceDeformer {
     this.gl.useProgram(this.gridProgram);
 
     // set the resolution for grid program
-    var resolutionLocation = this.gl.getUniformLocation(this.gridProgram, "u_resolution");
+    let resolutionLocation = this.gl.getUniformLocation(this.gridProgram, "u_resolution");
     this.gl.uniform2f(resolutionLocation, this.gl.drawingBufferWidth, this.gl.drawingBufferHeight);
 
     // load program for drawing deformed face
@@ -184,7 +184,7 @@ export class FaceDeformer {
     this.gl.vertexAttribPointer(this.texCoordLocation, 2, this.gl.FLOAT, false, 0, 0);
 
     // Create the texture.
-    var texture = this.gl.createTexture();
+    let texture = this.gl.createTexture();
     this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
     this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
     this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
@@ -215,8 +215,8 @@ export class FaceDeformer {
     }
 
     // create drawvertices based on points
-    var vertices = [];
-    for (var i = 0;i < this.verticeMap.length;i++) {
+    let vertices = [];
+    for (let i = 0;i < this.verticeMap.length;i++) {
       vertices.push(points[this.verticeMap[i][0]][0]);
       vertices.push(points[this.verticeMap[i][0]][1]);
       vertices.push(points[this.verticeMap[i][1]][0]);
@@ -225,10 +225,10 @@ export class FaceDeformer {
       vertices.push(points[this.verticeMap[i][2]][1]);
     }
 
-    var positionLocation = this.gl.getAttribLocation(this.drawProgram, "a_position");
+    let positionLocation = this.gl.getAttribLocation(this.drawProgram, "a_position");
 
     // Create a buffer for the position of the vertices.
-    var drawPosBuffer = this.gl.createBuffer();
+    let drawPosBuffer = this.gl.createBuffer();
     this.gl.bindBuffer(this.gl.ARRAY_BUFFER, drawPosBuffer);
     this.gl.enableVertexAttribArray(positionLocation);
     this.gl.vertexAttribPointer(positionLocation, 2, this.gl.FLOAT, false, 0, 0);
@@ -247,9 +247,9 @@ export class FaceDeformer {
     }
 
     // create drawvertices based on points
-    var vertices = [];
+    let vertices = [];
     // create new texturegrid
-    for (var i = 0;i < this.verticeMap.length;i++) {
+    for (let i = 0;i < this.verticeMap.length;i++) {
       vertices.push(points[this.verticeMap[i][0]][0]);
       vertices.push(points[this.verticeMap[i][0]][1]);
       vertices.push(points[this.verticeMap[i][1]][0]);
@@ -266,7 +266,7 @@ export class FaceDeformer {
       vertices.push(points[this.verticeMap[i][0]][1]);
     }
 
-    var positionLocation = this.gl.getAttribLocation(this.gridProgram, "a_position");
+    let positionLocation = this.gl.getAttribLocation(this.gridProgram, "a_position");
 
     // Create a buffer for position of the vertices (lines)
     this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.gridCoordbuffer);
@@ -282,14 +282,14 @@ export class FaceDeformer {
     this.gl.clear(this.gl.COLOR_BUFFER_BIT);
   }
 
-  public calculatePositions(parameters, useTransforms) {
-    var x, y, a, b;
-    var numParameters = parameters.length;
-    var positions = [];
-    for (var i = 0; i < this.pdmModel.patchModel.numPatches; i++) {
+  public calculatePositions(parameters, useTransforms):any {
+    let x, y, a, b;
+    let numParameters = parameters.length;
+    let positions = [];
+    for (let i = 0; i < this.pdmModel.patchModel.numPatches; i++) {
       x = this.pdmModel.shapeModel.meanShape[i][0];
       y = this.pdmModel.shapeModel.meanShape[i][1];
-      for (var j = 0;j < numParameters-4;j++) {
+      for (let j = 0;j < numParameters-4;j++) {
         x += this.pdmModel.shapeModel.eigenVectors[(i*2)][j]*parameters[j+4];
         y += this.pdmModel.shapeModel.eigenVectors[(i*2)+1][j]*parameters[j+4];
       }
@@ -304,4 +304,5 @@ export class FaceDeformer {
 
     return positions;
   }
+  //--END FACEDEFORMATION.TS
 }
