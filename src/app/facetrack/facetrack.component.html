@@ -2,7 +2,7 @@
 <canvas #overlay width="{{width}}" height="{{height}}" id="overlay"></canvas>
 <canvas #webgl width="{{width}}" height="{{height}}" id="webgl"></canvas>
 <div id="layer-3D" *ngIf="true">
-  <layer-3d
+  <app-layer-3d
     [width]="width"
     [height]="height"
     [cameraZ]="400"
@@ -16,6 +16,6 @@
     [rotationX]="rotationX"
     [posx]="posx"
     [posy]="posy">
-  </layer-3d>
+  </app-layer-3d>
 </div>
 <img #imageMask src="" [hidden]="true" id="image" alt="">

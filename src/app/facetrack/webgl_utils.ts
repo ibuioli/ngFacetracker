@@ -36,18 +36,18 @@
 declare let window: any;
 
 export class WebGLUtils {
-  private LOGGING_ENABLED:boolean = true;
+  private LOGGING_ENABLED = true;
 
-  constructor(){}
+  constructor() {}
 
-  public log(msg):void {
+  public log(msg): void {
     if (!this.LOGGING_ENABLED) { return; }
     if (window.console && window.console.log) {
       window.console.log(msg);
     }
   }
 
-  public error(msg):void {
+  public error(msg): void {
     if (!this.LOGGING_ENABLED) { return; }
     if (window.console) {
       if (window.console.error) {
@@ -59,16 +59,16 @@ export class WebGLUtils {
     throw msg;
   }
 
-  public loggingOff():void {
+  public loggingOff(): void {
     this.LOGGING_ENABLED = false;
   }
 
-  public isInIFrame():boolean {
+  public isInIFrame(): boolean {
     return window !== window.top;
   }
 
-  public glEnumToString(gl, value):string {
-    for (let p in gl) {
+  public glEnumToString(gl, value): string {
+    for (const p in gl) {
       if (gl[p] === value) {
         return p;
       }
@@ -76,7 +76,7 @@ export class WebGLUtils {
     return '0x' + value.toString(16);
   }
 
-  public makeFailHTML(msg):string {
+  public makeFailHTML(msg): string {
     return '' +
       '<table style="background-color: #8CE; width: 100%; height: 100%;"><tr>' +
       '<td align="center">' +
@@ -86,21 +86,21 @@ export class WebGLUtils {
       '</td></tr></table>';
   }
 
-  public setupWebGL(canvas, optAttribs):any {
+  public setupWebGL(canvas, optAttribs): any {
 
     if (!window.WebGLRenderingContext) {
       return null;
     }
 
-    let context = this.create3DContext(canvas, optAttribs);
+    const context = this.create3DContext(canvas, optAttribs);
     if (!context) {
       return null;
     }
     return context;
   }
 
-  public create3DContext(canvas, optAttribs):any {
-    let names = ['webgl', 'experimental-webgl'];
+  public create3DContext(canvas, optAttribs): any {
+    const names = ['webgl', 'experimental-webgl'];
     let context = null;
     for (let ii = 0; ii < names.length; ++ii) {
       try {
@@ -113,13 +113,13 @@ export class WebGLUtils {
     return context;
   }
 
-  public updateCSSIfInIFrame():void {
+  public updateCSSIfInIFrame(): void {
     if (this.isInIFrame()) {
       document.body.className = 'iframe';
     }
   }
 
-  public getWebGLContext(canvas):any {
+  public getWebGLContext(canvas): any {
     if (this.isInIFrame()) {
       this.updateCSSIfInIFrame();
 
@@ -128,14 +128,14 @@ export class WebGLUtils {
       canvas.height = canvas.clientHeight;
     }
 
-    let gl = this.setupWebGL(canvas, "");
+    const gl = this.setupWebGL(canvas, '');
     return gl;
   }
 
-  public loadShader(gl, shaderSource, shaderType, optErrorCallback):any {
-    let errFn = optErrorCallback || this.error;
+  public loadShader(gl, shaderSource, shaderType, optErrorCallback): any {
+    const errFn = optErrorCallback || this.error;
     // Create the shader object
-    let shader = gl.createShader(shaderType);
+    const shader = gl.createShader(shaderType);
 
     // Load the shader source
     gl.shaderSource(shader, shaderSource);
@@ -144,11 +144,11 @@ export class WebGLUtils {
     gl.compileShader(shader);
 
     // Check the compile status
-    let compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
+    const compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
     if (!compiled) {
       // Something went wrong during compilation; get the error
-      let lastError = gl.getShaderInfoLog(shader);
-      errFn("*** Error compiling shader '" + shader + "':" + lastError);
+      const lastError = gl.getShaderInfoLog(shader);
+      errFn('*** Error compiling shader \'' + shader + '\':' + lastError);
       gl.deleteShader(shader);
       return null;
     }
@@ -156,8 +156,8 @@ export class WebGLUtils {
     return shader;
   }
 
-  public loadProgram(gl, shaders, optAttribs, optLocations):any {
-    let program = gl.createProgram();
+  public loadProgram(gl, shaders, optAttribs, optLocations): any {
+    const program = gl.createProgram();
     for (let i = 0; i < shaders.length; ++i) {
       gl.attachShader(program, shaders[i]);
     }
@@ -184,10 +184,10 @@ export class WebGLUtils {
     return program;
   }
 
-  public createShaderFromScript(gl, scriptId, optShaderType, optErrorCallback):any {
+  public createShaderFromScript(gl, scriptId, optShaderType, optErrorCallback): any {
     let shaderSource = '';
     let shaderType;
-    let shaderScript = (<HTMLScriptElement>document.getElementById(scriptId));
+    const shaderScript = (<HTMLScriptElement>document.getElementById(scriptId));
     if (!shaderScript) {
       throw new Error('*** Error: unknown script element' + scriptId);
     }
@@ -213,5 +213,5 @@ export class WebGLUtils {
       optErrorCallback
     );
   }
-  //--END WEBGL_UTILS.TS
+  // --END WEBGL_UTILS.TS
 }

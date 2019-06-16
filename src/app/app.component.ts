@@ -6,8 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public width:number = 400;
-  public height:number = 300;
+  public width = 400;
+  public height = 300;
 
   constructor(){}
 

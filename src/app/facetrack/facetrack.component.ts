@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, ElementRef, Input, ViewChild } from '@angular/core';
-import { FaceTracker } from "./facetrack";
+import { FaceTracker } from './facetrack';
 declare var navigator: any;
 
 @Component({
@@ -12,18 +12,18 @@ export class FacetrackComponent implements OnInit {
   @ViewChild('overlay', {static: true}) private overlay: ElementRef;
   @ViewChild('webgl', {static: true}) private webgl: ElementRef;
   /////////////////////////////////////////////////////////////
-  private constraints:any;
-  public track:any;
-  public scaleX:number = 1;
-  public scaleY:number = 1;
-  public rotationY:number = 0;
-  public rotationZ:number = 0;
-  public rotationX:number = 0;
-  public posx:number = 0;
-  public posy:number = 0;
+  private constraints: any;
+  public track: any;
+  public scaleX = 1;
+  public scaleY = 1;
+  public rotationY = 0;
+  public rotationZ = 0;
+  public rotationX = 0;
+  public posx = 0;
+  public posy = 0;
   ////////////////////////////////////////////////////////////
-  @Input() public width:number = 400;
-  @Input() public height:number = 300;
+  @Input() public width = 400;
+  @Input() public height = 300;
 
   constructor() {
     navigator.getUserMedia = (navigator.getUserMedia ||
@@ -34,10 +34,10 @@ export class FacetrackComponent implements OnInit {
 
   public ngOnInit() {
     this.constraints = {
-      audio:false,
+      audio: false,
       video: {
-        width:{ideal:640},
-        height:{ideal:480},
+        width: {ideal: 640},
+        height: {ideal: 480},
         minAspectRatio: 1.333,
         maxAspectRatio: 1.334,
         minFrameRate: 30
@@ -47,20 +47,20 @@ export class FacetrackComponent implements OnInit {
     this.videoStart();
   }
 
-  public ngAfterViewInit(){
+  public ngAfterViewInit() {
     this.clmtrackr();
     this.loop();
   }
 
-  private videoStart(){
-    let video = this.hardwareVideo.nativeElement;
+  private videoStart() {
+    const video = this.hardwareVideo.nativeElement;
 
-    let promise = new Promise<MediaStream>((resolve, reject) => {
+    const promise = new Promise<MediaStream>((resolve, reject) => {
       navigator.getUserMedia(this.constraints, (stream) => {
         resolve(stream);
       }, (err) => reject(err));
     }).then((stream) => {
-      if ("srcObject" in video) {
+      if ('srcObject' in video) {
         video.srcObject = stream;
       } else {
         video.src = window.URL.createObjectURL(stream);
@@ -74,16 +74,16 @@ export class FacetrackComponent implements OnInit {
   private clmtrackr() {
     this.track = new FaceTracker(this.hardwareVideo, this.overlay, this.webgl, true);
     this.track.clmInit();
-    //Debug
+    // Debug
     this.track.drawLoop();
-    this.track.drawGrid();//*/Comment for No-Debug
-    //Draw Face Mask
-    //this.track.drawMask();//Comment for No-Mask
-    //Draw 3D Objects
-    this.track.getFaceData();//Comment for No-3D-Objects
+    this.track.drawGrid(); // */Comment for No-Debug
+    // Draw Face Mask
+    // this.track.drawMask();//Comment for No-Mask
+    // Draw 3D Objects
+    this.track.getFaceData(); // Comment for No-3D-Objects
   }
 
-  private loop = () =>{
+  private loop = () => {
     this.scaleX = this.track._scaleX;
     this.scaleY = this.track._scaleY;
     this.rotationY = this.track._rotationY;
@@ -96,7 +96,7 @@ export class FacetrackComponent implements OnInit {
   }
 
   private logError(error: any) {
-    console.log(error.name + ": " + error.message);
+    console.log(error.name + ': ' + error.message);
   }
 
 }
