@@ -23,7 +23,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+	      "node_modules/clmtrackr/build/clmtrackr.js"
+	    ]
           },
           "configurations": {
             "production": {

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Directive, ElementRef, Input, ViewChild } from '@angular/core';
 import * as THREE from 'three';
 
 @Component({
@@ -9,7 +9,7 @@ import * as THREE from 'three';
 export class ThreeComponent implements AfterViewInit {
   private camera: THREE.OrthographicCamera;
 
-  @ViewChild('canvas3D') private canvas3D: ElementRef;
+  @ViewChild('canvas3D', {static: true}) private canvas3D: ElementRef;
   private get canvas() : HTMLCanvasElement {
     return this.canvas3D.nativeElement;
   }

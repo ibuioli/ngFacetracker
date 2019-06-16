@@ -14,7 +14,7 @@ import { ThreeComponent } from './facetrack/three/three.component';
     ThreeComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

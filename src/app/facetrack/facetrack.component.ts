@@ -8,9 +8,9 @@ declare var navigator: any;
   styleUrls: ['./facetrack.component.css']
 })
 export class FacetrackComponent implements OnInit {
-  @ViewChild("hardwareVideo") private hardwareVideo: ElementRef;
-  @ViewChild("overlay") private overlay: ElementRef;
-  @ViewChild("webgl") private webgl: ElementRef;
+  @ViewChild('hardwareVideo', {static: true}) private hardwareVideo: ElementRef;
+  @ViewChild('overlay', {static: true}) private overlay: ElementRef;
+  @ViewChild('webgl', {static: true}) private webgl: ElementRef;
   /////////////////////////////////////////////////////////////
   private constraints:any;
   public track:any;
