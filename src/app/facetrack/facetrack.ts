@@ -39,7 +39,7 @@ export class FaceTracker {
     this._video = video;
     this._overlay = overlay;
     this._webgl = webgl;
-    this._imageMask = imageMask.nativeElement;
+    this._imageMask = imageMask;
     this._videoReady = videoReady;
     //////////////////////////////
     this._clm = new clm.tracker({useWebGL: true, searchWindow : 14});
@@ -87,7 +87,9 @@ export class FaceTracker {
     ////////////////////////////
     // Init Face facedeformation
     this._defor.init(this._webglCanvas);
-    this._defor.load(this._imageMask, this._points, this._faceModel.model());
+    if (this._imageMask.nativeElement.attributes['src'].value !== '') {
+      this._defor.load(this._imageMask.nativeElement, this._points, this._faceModel.model());
+    }
   }
 
   public clmStart() {
@@ -126,7 +128,9 @@ export class FaceTracker {
   public drawMask = () => {
     if (this._clm.getCurrentPosition()) {
       if (this._clm.getScore() > 0.5) {
-        this._defor.load(this._imageMask, this._points, this._faceModel.model());
+        if (this._imageMask.nativeElement.attributes['src'].value !== '') {
+          this._defor.load(this._imageMask.nativeElement, this._points, this._faceModel.model());
+        }
         this._defor.draw(this._clm.getCurrentPosition());
       } else {
         this._defor.clear();
