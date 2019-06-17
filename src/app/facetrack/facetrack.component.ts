@@ -11,6 +11,7 @@ export class FacetrackComponent implements OnInit {
   @ViewChild('hardwareVideo', {static: true}) private hardwareVideo: ElementRef;
   @ViewChild('overlay', {static: true}) private overlay: ElementRef;
   @ViewChild('webgl', {static: true}) private webgl: ElementRef;
+  @ViewChild('imageMask', {static: true}) private imageMask: ElementRef;
   /////////////////////////////////////////////////////////////
   private constraints: any;
   public track: any;
@@ -56,23 +57,23 @@ export class FacetrackComponent implements OnInit {
     const video = this.hardwareVideo.nativeElement;
 
     const promise = new Promise<MediaStream>((resolve, reject) => {
-      navigator.getUserMedia(this.constraints, (stream) => {
-        resolve(stream);
-      }, (err) => reject(err));
-    }).then((stream) => {
-      if ('srcObject' in video) {
-        video.srcObject = stream;
-      } else {
-        video.src = window.URL.createObjectURL(stream);
-      }
-      video.onloadedmetadata = function(e) {
-        video.play();
-      };
-    }).catch(this.logError);
+      navigator.getUserMedia(this.constraints, (stream: MediaStream | PromiseLike<MediaStream>) => {
+          resolve(stream);
+        }, (err: any) => reject(err));
+        }).then((stream) => {
+        if ('srcObject' in video) {
+          video.srcObject = stream;
+        } else {
+          video.src = window.URL.createObjectURL(stream);
+        }
+        video.onloadedmetadata = function(e: any) {
+          video.play();
+        };
+      }).catch(this.logError);
   }
 
   private clmtrackr() {
-    this.track = new FaceTracker(this.hardwareVideo, this.overlay, this.webgl, true);
+    this.track = new FaceTracker(this.hardwareVideo, this.overlay, this.webgl, this.imageMask, true);
     this.track.clmInit();
     // Debug
     this.track.drawLoop();
