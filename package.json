@@ -23,7 +23,7 @@
     "@angular/router": "8.0.0",
     "clmtrackr": "^1.1.2",
     "rxjs": "^6.5.2",
-    "rxjs-compat": "^6.0.0-rc.0",
+    "rxjs-compat": "^5.0.0-rc.0",
     "three": "^0.105.2",
     "three-collada-loader": "0.0.1",
     "zone.js": "^0.9.1"
