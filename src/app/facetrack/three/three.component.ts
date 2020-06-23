@@ -21,27 +21,18 @@ export class ThreeComponent implements AfterViewInit {
   @Input() public height = 300;
   @Input() public cameraZ = 400;
   @Input() public fieldOfView = 50;
-  // tslint:disable-next-line: no-input-rename
-  @Input('nearClipping') public nearClippingPane = 1;
-  // tslint:disable-next-line: no-input-rename
-  @Input('farClipping') public farClippingPane = 1000;
+  @Input() public nearClippingPane = 1;
+  @Input() public farClippingPane = 1000;
 
-  // tslint:disable-next-line: no-input-rename
-  @Input('scaleX') public scaleX = 1;
-  // tslint:disable-next-line: no-input-rename
-  @Input('scaleY') public scaleY = 1;
+  @Input() public scaleX = 1;
+  @Input() public scaleY = 1;
 
-  // tslint:disable-next-line: no-input-rename
-  @Input('rotationY') public rotationY = 0;
-  // tslint:disable-next-line: no-input-rename
-  @Input('rotationZ') public rotationZ = 0;
-  // tslint:disable-next-line: no-input-rename
-  @Input('rotationX') public rotationX = 0;
+  @Input() public rotationY = 0;
+  @Input() public rotationZ = 0;
+  @Input() public rotationX = 0;
 
-  // tslint:disable-next-line: no-input-rename
-  @Input('posx') public posx = 0;
-  // tslint:disable-next-line: no-input-rename
-  @Input('posy') public posy = 0;
+  @Input() public posx = 0;
+  @Input() public posy = 0;
 
   constructor() { }
 

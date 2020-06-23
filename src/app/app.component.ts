@@ -9,8 +9,8 @@ export class AppComponent {
   public width = 400;
   public height = 300;
 
-  constructor(){}
+  constructor() {}
 
-  ngOnInit(){}
+  ngOnInit() {}
 
 }
