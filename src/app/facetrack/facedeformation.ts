@@ -254,33 +254,35 @@ export class FaceDeformer {
     // create drawvertices based on points
     const vertices = [];
     // create new texturegrid
-    for (let i = 0; i < this.verticeMap.length; i++) {
-      vertices.push(points[this.verticeMap[i][0]][0]);
-      vertices.push(points[this.verticeMap[i][0]][1]);
-      vertices.push(points[this.verticeMap[i][1]][0]);
-      vertices.push(points[this.verticeMap[i][1]][1]);
+    if (this.verticeMap) {
+      for (let i = 0; i < this.verticeMap.length; i++) {
+        vertices.push(points[this.verticeMap[i][0]][0]);
+        vertices.push(points[this.verticeMap[i][0]][1]);
+        vertices.push(points[this.verticeMap[i][1]][0]);
+        vertices.push(points[this.verticeMap[i][1]][1]);
 
-      vertices.push(points[this.verticeMap[i][1]][0]);
-      vertices.push(points[this.verticeMap[i][1]][1]);
-      vertices.push(points[this.verticeMap[i][2]][0]);
-      vertices.push(points[this.verticeMap[i][2]][1]);
+        vertices.push(points[this.verticeMap[i][1]][0]);
+        vertices.push(points[this.verticeMap[i][1]][1]);
+        vertices.push(points[this.verticeMap[i][2]][0]);
+        vertices.push(points[this.verticeMap[i][2]][1]);
 
-      vertices.push(points[this.verticeMap[i][2]][0]);
-      vertices.push(points[this.verticeMap[i][2]][1]);
-      vertices.push(points[this.verticeMap[i][0]][0]);
-      vertices.push(points[this.verticeMap[i][0]][1]);
+        vertices.push(points[this.verticeMap[i][2]][0]);
+        vertices.push(points[this.verticeMap[i][2]][1]);
+        vertices.push(points[this.verticeMap[i][0]][0]);
+        vertices.push(points[this.verticeMap[i][0]][1]);
+      }
+
+      const positionLocation = this.gl.getAttribLocation(this.gridProgram, 'a_position');
+
+      // Create a buffer for position of the vertices (lines)
+      this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.gridCoordbuffer);
+      this.gl.enableVertexAttribArray(positionLocation);
+      this.gl.vertexAttribPointer(positionLocation, 2, this.gl.FLOAT, false, 0, 0);
+      this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(vertices), this.gl.STATIC_DRAW);
+
+      // Draw the lines
+      this.gl.drawArrays(this.gl.LINES, 0, this.numTriangles * 6);
     }
-
-    const positionLocation = this.gl.getAttribLocation(this.gridProgram, 'a_position');
-
-    // Create a buffer for position of the vertices (lines)
-    this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.gridCoordbuffer);
-    this.gl.enableVertexAttribArray(positionLocation);
-    this.gl.vertexAttribPointer(positionLocation, 2, this.gl.FLOAT, false, 0, 0);
-    this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(vertices), this.gl.STATIC_DRAW);
-
-    // Draw the lines
-    this.gl.drawArrays(this.gl.LINES, 0, this.numTriangles * 6);
   }
 
   public clear(): void {
