@@ -21,7 +21,7 @@
     "@angular/platform-browser-dynamic": "11.1.0",
     "@angular/router": "11.1.0",
     "clmtrackr": "^1.1.2",
-    "rxjs": "^6.5.5",
+    "rxjs": "^6.6.3",
     "rxjs-compat": "^6.5.5",
     "three": "^0.117.1",
     "three-collada-loader": "0.0.1",
