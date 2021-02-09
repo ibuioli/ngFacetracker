@@ -23,7 +23,7 @@
     "clmtrackr": "^1.1.2",
     "rxjs": "^6.6.3",
     "rxjs-compat": "^6.5.5",
-    "three": "^0.117.1",
+    "three": "^0.125.2",
     "three-collada-loader": "0.0.1",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
@@ -36,6 +36,7 @@
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.8",
     "@types/node": "^12.11.1",
+    "@types/three": "^0.125.1",
     "codelyzer": "^6.0.0",
     "core-js": "^3.6.5",
     "jasmine-core": "~3.6.0",
