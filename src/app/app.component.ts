@@ -6,11 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public width = 400;
-  public height = 300;
+  /* Camera Resolution */
+  /* More is better */
+  public width = 640;
+  public height = 480;
 
   constructor() {}
-
-  ngOnInit() {}
 
 }

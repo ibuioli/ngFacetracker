@@ -21,8 +21,8 @@ export class ThreeComponent implements AfterViewInit {
   @Input() public height = 300;
   @Input() public cameraZ = 400;
   @Input() public fieldOfView = 50;
-  @Input() public nearClippingPane = 1;
-  @Input() public farClippingPane = 1000;
+  @Input() public nearClipping = 1;
+  @Input() public farClipping = 1000;
 
   @Input() public scaleX = 1;
   @Input() public scaleY = 1;
@@ -67,7 +67,7 @@ export class ThreeComponent implements AfterViewInit {
     /* Camera */
     const aspectRatio = this.canvas.clientWidth / this.canvas.clientHeight;
     this.camera = new THREE.OrthographicCamera(this.canvas.clientWidth / - 2, this.canvas.clientWidth / 2,
-    this.canvas.clientHeight / 2, this.canvas.clientHeight / - 2, this.nearClippingPane, this.farClippingPane);
+    this.canvas.clientHeight / 2, this.canvas.clientHeight / - 2, this.nearClipping, this.farClipping);
     this.camera.position.z = this.cameraZ;
   }
 
