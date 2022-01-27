@@ -23,7 +23,7 @@
     "clmtrackr": "^1.1.2",
     "rxjs": "^6.6.3",
     "rxjs-compat": "^6.5.5",
-    "three": "^0.134.0",
+    "three": "^0.137.0",
     "three-collada-loader": "0.0.1",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
