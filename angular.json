@@ -108,7 +108,6 @@
       }
     }
   },
-  "defaultProject": "ng-facetracker",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
