@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { FaceTracker } from './facetrack';
 declare var navigator: any;
 
@@ -7,7 +7,7 @@ declare var navigator: any;
   templateUrl: './facetrack.component.html',
   styleUrls: ['./facetrack.component.css']
 })
-export class FacetrackComponent implements OnInit {
+export class FacetrackComponent implements OnInit, AfterViewInit {
   @ViewChild('hardwareVideo', {static: true}) private hardwareVideo: ElementRef;
   @ViewChild('overlay', {static: true}) private overlay: ElementRef;
   @ViewChild('webgl', {static: true}) private webgl: ElementRef;
@@ -63,8 +63,6 @@ export class FacetrackComponent implements OnInit {
         }).then((stream) => {
         if ('srcObject' in video) {
           video.srcObject = stream;
-        } else {
-          video.src = window.URL.createObjectURL(stream);
         }
         video.onloadedmetadata = function(e: any) {
           video.play();
