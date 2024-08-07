@@ -60,18 +60,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng-facetracker:build"
+            "buildTarget": "ng-facetracker:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ng-facetracker:build:production"
+              "buildTarget": "ng-facetracker:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-facetracker:build"
+            "buildTarget": "ng-facetracker:build"
           }
         },
         "test": {
